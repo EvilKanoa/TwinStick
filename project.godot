@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player.gd"
+} ]
+_global_script_class_icons={
+"Player": ""
+}
+
+[application]
+
+config/name="Twin Stick"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=540
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="walls"
+2d_physics/layer_3="rounds"
+
+[physics]
+
+2d/cell_size=64
+
+[rendering]
+
+quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 1, 1, 1, 1 )
+environment/default_environment="res://default_env.tres"
+
+[world]
+
+2d/cell_size=64
