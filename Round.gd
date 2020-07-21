@@ -1,6 +1,8 @@
 extends RigidBody2D
 
 
+export (int) var round_speed = 600
+
 var shooter: Node
 onready var map_limits = get_parent().get_map_limits()
 
@@ -9,7 +11,7 @@ func _ready():
 	$ExplosionTimer.wait_time = $ExplosionParticles2D.lifetime
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	process_map_limits()
 
 
@@ -18,12 +20,10 @@ func process_map_limits():
 		queue_free()
 
 
-func shoot(position, direction, power):
+func shoot():
 	visible = true
 	sleeping = false
-	self.position = position
-	self.rotation = direction
-	apply_central_impulse(Vector2(cos(direction - PI / 2), sin(direction - PI / 2)) * power)
+	apply_central_impulse(Vector2(cos(rotation - PI / 2), sin(rotation - PI / 2)) * round_speed)
 
 
 func hit(_body, _shooter):

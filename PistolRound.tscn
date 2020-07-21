@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://sprites/round/round_alt.png" type="Texture" id=1]
-[ext_resource path="res://Round.gd" type="Script" id=2]
+[ext_resource path="res://Round.gd" type="Script" id=1]
+[ext_resource path="res://sprites/round/round_alt.png" type="Texture" id=2]
 [ext_resource path="res://sprites/particles/flame_04_64x.png" type="Texture" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -55,17 +55,18 @@ scale = 0.02
 scale_random = 0.03
 color_ramp = SubResource( 4 )
 
-[node name="Round" type="RigidBody2D"]
+[node name="PistolRound" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 5
 gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
 sleeping = true
-script = ExtResource( 2 )
+script = ExtResource( 1 )
+round_speed = 500
 
 [node name="RoundSprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -85,8 +86,9 @@ one_shot = true
 show_behind_parent = true
 position = Vector2( 0, 6 )
 amount = 150
+lifetime = 2.5
 preprocess = 1.0
-speed_scale = 1.5
+speed_scale = 2.0
 process_material = SubResource( 5 )
 texture = ExtResource( 3 )
 [connection signal="body_entered" from="." to="." method="_on_Round_body_entered"]

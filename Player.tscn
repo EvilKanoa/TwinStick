@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://MoveSprite.gd" type="Script" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/player/player_gun_idle.png" type="Texture" id=3]
-[ext_resource path="res://sprites/player/player_gun_active.png" type="Texture" id=4]
 [ext_resource path="res://sprites/player/player_base_1.png" type="Texture" id=5]
 [ext_resource path="res://sprites/reticle/reticle_filled.png" type="Texture" id=6]
 [ext_resource path="res://sprites/reticle/reticle_empty.png" type="Texture" id=7]
@@ -42,24 +41,24 @@ scale_random = 0.5
 color_ramp = SubResource( 3 )
 hue_variation_random = 1.0
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "shooting",
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 13.0967
 height = 17.5266
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -92,18 +91,17 @@ process_material = SubResource( 4 )
 
 [node name="AimSprite" type="AnimatedSprite" parent="."]
 z_index = -1
-frames = SubResource( 7 )
+frames = SubResource( 5 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.132427, -1.5892 )
 rotation = 1.5708
-shape = SubResource( 8 )
-
-[node name="FireTimer" type="Timer" parent="."]
+shape = SubResource( 6 )
 
 [node name="AimRayLine2D" type="Line2D" parent="."]
 visible = false
+z_index = -1
 points = PoolVector2Array( 0, 0, 0, 0 )
 width = 1.0
 default_color = Color( 1, 1, 1, 0.498039 )
@@ -114,6 +112,17 @@ collision_mask = 3
 
 [node name="ReticleSprite" type="AnimatedSprite" parent="."]
 visible = false
-frames = SubResource( 6 )
+frames = SubResource( 7 )
 animation = "empty"
-[connection signal="timeout" from="FireTimer" to="." method="_on_Timer_timeout"]
+
+[node name="AmmoCountLabel" type="RichTextLabel" parent="."]
+margin_left = -32.0
+margin_top = 21.0
+margin_right = 32.0
+margin_bottom = 37.0
+rect_pivot_offset = Vector2( 32, -21 )
+text = "000 / 000"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

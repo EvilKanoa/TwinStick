@@ -2,7 +2,6 @@ extends Node2D
 
 
 onready var map_limits_target := $NavigationTileMap
-const Round = preload("res://Round.tscn")
 
 
 func get_map_limits():
@@ -11,11 +10,7 @@ func get_map_limits():
 		"position": used_rect.position * map_limits_target.cell_size,
 		"end": used_rect.end * map_limits_target.cell_size,
 	}
-	
 
 
-func _on_Player_round_fired(shooter, position, direction, power):
-	var rnd = Round.instance()
-	add_child(rnd)
-	rnd.shooter = shooter
-	rnd.shoot(position, direction, power)
+func _on_WeaponFactory_round_fired(round_node):
+	add_child(round_node)
